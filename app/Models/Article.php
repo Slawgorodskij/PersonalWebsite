@@ -12,7 +12,6 @@ class Article extends Model
 
     protected $fillable = [
         'category_id',
-        'image_id',
         'title',
         'description',
         'articles_body',
@@ -28,4 +27,5 @@ class Article extends Model
     {
         return $this->hasMany(Image::class);
     }
+
 }
