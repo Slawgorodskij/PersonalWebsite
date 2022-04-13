@@ -1,0 +1,27 @@
+.articles {
+    margin-bottom: 25vh;
+}
+
+.article {
+    display: flex;
+    height: 40vh;
+    margin-bottom: 5vh;
+    cursor: pointer;
+
+    &__photo {
+        position: relative;
+        flex: 1 1 35%;
+
+        &_img {
+            @include photo-image;
+        }
+    }
+
+    &__text {
+        padding: 25px;
+        flex: 1 1 65%;
+        background-color: var(--color-background-text);
+        border-radius: 0 10px 10px 0;
+
+    }
+}

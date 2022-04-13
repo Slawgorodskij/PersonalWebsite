@@ -1,0 +1,39 @@
+.contact {
+  &__form {
+    margin-bottom: 25vh;
+  }
+
+  &__group {
+    margin-bottom: 10vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
+  }
+
+  &__input {
+    outline: none;
+    border: 1px solid #DEE5ED;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #5E6271;
+    width: 100%;
+    height: inherit;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  &__textarea {
+    outline: none;
+    border: 1px solid #DEE5ED;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #5E6271;
+    width: 100%;
+    height: inherit;
+    border-radius: 6px;
+    background: #fff;
+  }
+}

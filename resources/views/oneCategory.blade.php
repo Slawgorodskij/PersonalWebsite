@@ -11,7 +11,11 @@
                 <a href="{{route('article', $article->id)}}">
                     <div class="article">
                         <div class="article__item article__photo">
-                            <img class="article__photo_img" src="/storage/images/{{$article->image[0]['name_image']}}" alt="">
+                            @isset($article->image[0])
+                                <img class="article__photo_img"
+                                     src="/storage/images/{{$article->image[0]['name_image']}}" alt="">
+                            @endisset
+
                         </div>
                         <div class="article__item article__text">
                             <h2>{{$article->title}}</h2>

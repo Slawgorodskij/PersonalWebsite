@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\AdminArticleController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifferentController;
@@ -20,19 +22,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/portfolio', [PortfolioController::class, 'portfolio'])->name('portfolio');
 Route::get('/category/{id}', [CategoryController::class, 'oneCategory'])->name('category');
 Route::get('/article/{id}', [ArticleController::class, 'oneArticle'])->name('article');
 Route::get('/about', [AboutController::class, 'about'])->name('about');
-//Route::get('/different', [DifferentController::class, 'different'])->name('different');
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::middleware('role:admin')
+    ->prefix('admin')
+    ->group(function () {
+        Route::resource('article', AdminArticleController::class);
+        Route::get('index', [AdminController::class, 'index'])->name('home_admin');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    });
+
 
 require __DIR__.'/auth.php';
