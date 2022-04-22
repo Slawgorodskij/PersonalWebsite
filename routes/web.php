@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifferentController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\TravelController;
@@ -23,12 +24,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/portfolio', [PortfolioController::class, 'portfolio'])->name('portfolio');
 Route::get('/category/{id}', [CategoryController::class, 'oneCategory'])->name('category');
 Route::get('/article/{id}', [ArticleController::class, 'oneArticle'])->name('article');
 Route::get('/about', [AboutController::class, 'about'])->name('about');
+Route::resource('feedback', FeedbackController::class);
 
 Route::middleware('role:admin')
     ->prefix('admin')
@@ -39,4 +40,4 @@ Route::middleware('role:admin')
     });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
