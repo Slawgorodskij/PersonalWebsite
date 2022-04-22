@@ -38,8 +38,10 @@
         <div class="presentation container wrapper">
             @foreach($articles as $article)
                 <div class="presentation__item">
-                    <img class="presentation__photo" src="/storage/images/{{$article->image[0]['name_image']}}"
-                         alt="photo">
+                    @isset($article->image[0])
+                        <img class="presentation__photo" src="/storage/images/{{$article->image[0]['name_image']}}"
+                             alt="photo">
+                    @endisset
                     <div class="presentation__hover">
                         <a class="presentation__hover_link" href="{{route('article', $article->id)}}">
                             <h2>{{$article->title}}</h2>
