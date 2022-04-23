@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ArticleFormRequest;
 use App\Http\Requests\Admin\NewArticleFormRequest;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -46,8 +47,13 @@ class AdminArticleController extends Controller
      */
     public function store(NewArticleFormRequest $request)
     {
-        Article::create($request->validated());
-        return redirect()->route('article.index');
+        $article = Article::create($request->validated());
+        if ($request->has('name_image')) {
+            $dataImage['name_image'] = str_replace('public/images', '', $request->file('name_image')->store('public/images'));
+            $dataImage['article_id'] = $article->id;
+            Image::create($dataImage);
+        }
+        return to_route('article.index');
     }
 
     /**

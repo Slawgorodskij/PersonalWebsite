@@ -10,15 +10,15 @@
             <div>
                 <div class="presentation container wrapper">
                     @foreach($images as $image)
-                    <div class="presentation__item">
-                        <img class="presentation__photo" src="/storage/images/{{$image->name_image}}" alt="photo">
-                    </div>
+                        <div class="presentation__item">
+                            <img class="presentation__photo" src="/storage/images/{{$image->name_image}}" alt="photo">
+                        </div>
                     @endforeach
                 </div>
             </div>
 
             <h3>{{$article->description}}</h3>
-            <p>{{$article->articles_body}}</p>
+            {!! $article->articles_body !!}
         </div>
 
     </main>

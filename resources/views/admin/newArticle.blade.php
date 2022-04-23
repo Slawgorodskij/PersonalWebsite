@@ -13,7 +13,7 @@
 
         <div class="page__body container">
             <div class="mt-8">
-                <form class="space-y-5 mt-5" method="POST"
+                <form class="space-y-5 mt-5" method="POST" enctype="multipart/form-data"
                       action="{{ isset($article) ? route('article.update', $article) : route('article.store') }}">
                     @csrf
 
@@ -50,7 +50,7 @@
                     <p class="text-red-500">{{ $message }}</p>
                     @enderror
 
-                    <textarea name="articles_body"
+                    <textarea id="editor" name="articles_body"
                               class="w-full h-12 border border-gray-800 rounded px-3 @error('articles_body') border-red-500 @enderror"
                               placeholder="текст статьи"
                     >{{ $article->articles_body ?? '' }}</textarea>
@@ -59,6 +59,8 @@
                     <p class="text-red-500">{{ $message }}</p>
                     @enderror
 
+                    <input type="file" name="name_image">
+
                     <button type="submit" class="text-center w-full bg-blue-900 rounded-md text-white py-3 font-medium"
                             value="save">
                         Сохранить
@@ -66,13 +68,26 @@
                 </form>
             </div>
 
-{{--                    <div class="transition">--}}
+            {{--                    <div class="transition">--}}
             {{--                        <a href="{{$route}}" class="transition-button">--}}
             {{--                            <span class="transition-button__text">{{$title_button}}</span>--}}
             {{--                        </a>--}}
             {{--                    </div>--}}
-                </div>
+        </div>
 
     </main>
     {{--    {{route('article', $article->id)}}--}}
 @endsection
+
+@push('scripts')
+    <script>
+
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+
+    </script>
+@endpush
+

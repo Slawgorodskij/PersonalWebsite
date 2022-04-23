@@ -11,7 +11,7 @@ class Image extends Model
 
     protected $fillable = [
         'article_id',
-        'image',
+        'name_image',
     ];
 
     public function article()

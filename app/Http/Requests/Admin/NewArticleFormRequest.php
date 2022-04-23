@@ -28,6 +28,7 @@ class NewArticleFormRequest extends FormRequest
             'title' => ['required', 'min:5', 'max:50', 'unique:articles'],
             'description' => ['required', 'min:10', 'max:100'],
             'articles_body' => ['required', 'max:1000'],
+            'name_image'=>['image'],
         ];
     }
 }

@@ -16,12 +16,18 @@
     <!-- Styles -->
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+@stack('styles')
 
-    <!-- icon -->
-    <link rel="shortcut icon" href="/storage/images/logo.ico" />
+<!-- icon -->
+
+    <link rel="shortcut icon" href="/storage/images/logo.ico"/>
 
     <!-- Scripts -->
+
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+
+
 </head>
 <body>
 <div id="app">
@@ -31,6 +37,9 @@
 
     @include('templates.footer')
 </div>
+
+{{--<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>--}}
+@stack('scripts')
 </body>
 {{--    <body class="font-sans antialiased">--}}
 {{--        <div class="min-h-screen bg-gray-100">--}}
