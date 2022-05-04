@@ -25,7 +25,7 @@ class ArticleFormRequest extends FormRequest
     {
         return [
             'category_id' => ['required', 'integer', 'exists:categories,id'],
-            'title' => ['required', 'min:5', 'max:50'],
+            'title' => ['required', 'min:5', 'max:50', 'unique:articles'],
             'description' => ['required', 'min:10', 'max:100'],
             'articles_body' => ['required', 'max:1000'],
         ];

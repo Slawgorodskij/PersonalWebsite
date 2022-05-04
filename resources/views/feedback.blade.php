@@ -6,55 +6,55 @@
         <div class="introduction">
             <h2 class="introduction__text container">{{$title}}</h2>
         </div>
+        @if(session('success'))
+            <div class="container notice">
+                {{session('success')}}
+            </div>
+        @endif
+        <div class="block-form container">
+            <form method="POST" action="{{ route('feedback.store') }}">
+                @csrf
 
+                <input name="name" type="text"
+                       class="block-form__input @error('name') block-form__input_error @enderror"
+                       placeholder="Ваше имя*"/>
 
-        <div class="page__body container">
-            <div class="mt-8">
-                <form class="space-y-5 mt-5" method="POST"
-                      action="{{ route('feedback.store') }}">
-                    @csrf
+                @error('name')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
+                <input name="email" type="email"
+                       class="block-form__input @error('email') block-form__input_error @enderror"
+                       placeholder="Ваш email*"/>
 
-                    <input name="name" type="text"
-                           class="w-full h-12 border border-gray-800 rounded px-3 @error('name') border-red-500 @enderror"
-                           placeholder="Ваше имя"/>
+                @error('email')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
-                    @error('name')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+                <input name="phone" type="text"
+                       class="block-form__input @error('phone') block-form__input_error @enderror"
+                       placeholder="Номер вашего телефона"/>
 
-                    <input name="email" type="email"
-                           class="w-full h-12 border border-gray-800 rounded px-3 @error('email') border-red-500 @enderror"
-                           placeholder="Ваш email"/>
+                @error('phone')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
-                    @error('email')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
-
-                    <input name="phone" type="text"
-                           class="w-full h-12 border border-gray-800 rounded px-3 @error('phone') border-red-500 @enderror"
-                           placeholder="Номер вашего телефона"/>
-
-                    @error('phone')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
-
-                    <textarea name="message"
-                              class="w-full h-12 border border-gray-800 rounded px-3 @error('message') border-red-500 @enderror"
-                              placeholder="текст обращения">
-
+                <textarea name="message"
+                          class="block-form__input @error('message') block-form__input_error @enderror"
+                          placeholder="текст обращения*">
                     </textarea>
 
-                    @error('message')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+                @error('message')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
-                    <button type="submit" class="text-center w-full bg-blue-900 rounded-md text-white py-3 font-medium"
-                            value="save">
-                        Отправить
-                    </button>
-                </form>
-            </div>
+                <button class="button admin__button" type="submit"
+                        value="save">
+                    <span class="transition-button__text"> Отправить</span>
+
+                </button>
+            </form>
+        </div>
 
 
     </main>

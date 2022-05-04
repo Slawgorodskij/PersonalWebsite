@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminArticleController;
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminFeedbackController;
+use App\Http\Controllers\Admin\AdminImageController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifferentController;
@@ -34,10 +37,15 @@ Route::resource('feedback', FeedbackController::class);
 Route::middleware('role:admin')
     ->prefix('admin')
     ->group(function () {
-        Route::resource('article', AdminArticleController::class);
-        Route::get('index', [AdminController::class, 'index'])->name('home_admin');
+        Route::resource('/article', AdminArticleController::class);
+        Route::resource('/category', AdminCategoryController::class);
+        Route::resource('/images', AdminImageController::class);
+        Route::resource('/reviews', AdminFeedbackController::class);
+
+        Route::get('/index', [AdminController::class, 'index'])->name('home_admin');
+        Route::get('/articles', [AdminController::class, 'article'])->name('article_admin');
+        Route::get('/categories', [AdminController::class, 'category'])->name('category_admin');
 
     });
-
 
 require __DIR__ . '/auth.php';

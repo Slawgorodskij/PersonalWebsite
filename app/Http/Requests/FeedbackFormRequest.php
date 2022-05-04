@@ -25,8 +25,8 @@ class FeedbackFormRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['email:rfc,dns'],
-            'phone' => ['numeric'],
+            'email' => ['required', 'email:rfc,dns'],
+            'phone' => ['nullable','numeric'],
             'message' => ['required', 'max:1000'],
         ];
     }

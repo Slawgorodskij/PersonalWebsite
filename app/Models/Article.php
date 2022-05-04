@@ -15,7 +15,6 @@ class Article extends Model
         'title',
         'description',
         'articles_body',
-
     ];
 
     public function category()

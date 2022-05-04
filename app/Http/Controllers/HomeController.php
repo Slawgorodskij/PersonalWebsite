@@ -12,7 +12,7 @@ class HomeController extends Controller
         return view('home', [
             'articles' => Article::with('image')
                 ->orderByDesc('created_at')
-                ->take(2)
+                ->take(4)
                 ->get(),
         ]);
     }

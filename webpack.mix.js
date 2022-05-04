@@ -11,7 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js');
+mix.js('resources/js/app.js', 'public/js')
+    .vue();
+
+mix.sass('resources/scss/app.scss', 'public/css').options({
+    processCssUrls: false
+});
 
 mix.postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
@@ -19,7 +24,5 @@ mix.postCss('resources/css/app.css', 'public/css', [
     require('autoprefixer'),
 ]);
 
-mix.sass('resources/scss/app.scss', 'public/css').options({
-    processCssUrls: false
-});
+
 

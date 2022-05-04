@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ArticleUpdateFormRequest;
+use App\Http\Requests\Admin\ImageFormRequest;
 use App\Http\Requests\Admin\ArticleFormRequest;
-use App\Http\Requests\Admin\NewArticleFormRequest;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Image;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class AdminArticleController extends Controller
@@ -34,7 +33,7 @@ class AdminArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.NewArticle', [
+        return view('admin.newArticle', [
             'category' => Category::all(),
         ]);
     }
@@ -42,30 +41,27 @@ class AdminArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param NewArticleFormRequest $request
+     * @param ArticleFormRequest $request
      * @return Response
      */
-    public function store(NewArticleFormRequest $request)
+    public function store(ArticleFormRequest $request)
     {
         $article = Article::create($request->validated());
-        if ($request->has('name_image')) {
-            $dataImage['name_image'] = str_replace('public/images', '', $request->file('name_image')->store('public/images'));
-            $dataImage['article_id'] = $article->id;
-            Image::create($dataImage);
-        }
-        return to_route('article.index');
+
+        return to_route('article.show', $article);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Article $article
      * @return Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
         return view('admin.oneArticle', [
-            'article' => Article::find($id),
+            'article' => $article,
+            'images' => $article->image,
         ]);
     }
 
@@ -86,14 +82,14 @@ class AdminArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ArticleFormRequest $request
+     * @param ArticleUpdateFormRequest $request
      * @param Article $article
      * @return Response
      */
-    public function update(ArticleFormRequest $request, Article $article)
+    public function update(ArticleUpdateFormRequest $request, Article $article)
     {
         $article->update($request->validated());
-        return to_route('article.show', [$article->id]);
+        return to_route('article.show', $article->id);
     }
 
     /**
@@ -104,9 +100,8 @@ class AdminArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-
         $article->delete();
 
-        return to_route('article.index');
+        return to_route('article_admin');
     }
 }

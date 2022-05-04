@@ -6,6 +6,9 @@
   }
 &__logo{
   padding-top: 15px;
+    @include mobile{
+        height: 10vh;
+    }
 }
   &__social {
     @include flex-all-sb;

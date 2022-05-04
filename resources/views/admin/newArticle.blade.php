@@ -11,72 +11,66 @@
             </div>
         </div>
 
-        <div class="page__body container">
-            <div class="mt-8">
-                <form class="space-y-5 mt-5" method="POST" enctype="multipart/form-data"
-                      action="{{ isset($article) ? route('article.update', $article) : route('article.store') }}">
-                    @csrf
+        <div class="block-form container">
+            <form method="POST" enctype="multipart/form-data"
+                  action="{{ isset($article) ? route('article.update', $article) : route('article.store') }}">
+                @csrf
 
-                    @if(isset($article))
-                        @method('PUT')
-                    @endif
+                @if(isset($article))
+                    @method('PUT')
+                @endif
 
-                    @if(is_int($category))
-                        <input type="hidden" name="category_id" value="{{$category}}">
-                    @else
-                        <select name="category_id" class="w-full h-12 border border-gray-800 rounded px-3">
-                            <option disabled>надо выбрать категорию</option>
-                            @foreach($category as $item)
-                                <option value="{{$item->id}}">{{$item->title}}</option>
-                            @endforeach
-                        </select>
+                @if(is_int($category))
+                    <input type="hidden" name="category_id" value="{{$category}}">
+                @else
+                    <select class="block-form__input" name="category_id">
+                        <option disabled>надо выбрать категорию</option>
+                        @foreach($category as $item)
+                            <option value="{{$item->id}}">{{$item->title}}</option>
+                        @endforeach
+                    </select>
 
-                    @endif
+                @endif
 
-                    <input name="title" type="text"
-                           class="w-full h-12 border border-gray-800 rounded px-3 @error('title') border-red-500 @enderror"
-                           placeholder="Заголовок статьи" value="{{ $article->title ?? '' }}"/>
+                <input name="title" type="text"
+                       class="block-form__input @error('title') block-form__input_error @enderror"
+                       placeholder="Заголовок статьи" value="{{ $article->title ?? '' }}"/>
 
-                    @error('title')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+                @error('title')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
-                    <input name="description" type="text"
-                           class="w-full h-12 border border-gray-800 rounded px-3 @error('description') border-red-500 @enderror"
-                           placeholder="Короткое описание статьи"
-                           value="{{ $article->description ?? '' }}"/>
+                <input name="description" type="text"
+                       class="block-form__input @error('description') block-form__input_error @enderror"
+                       placeholder="Короткое описание статьи"
+                       value="{{ $article->description ?? '' }}"/>
 
-                    @error('description')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+                @error('description')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
-                    <textarea id="editor" name="articles_body"
-                              class="w-full h-12 border border-gray-800 rounded px-3 @error('articles_body') border-red-500 @enderror"
-                              placeholder="текст статьи"
-                    >{{ $article->articles_body ?? '' }}</textarea>
+                <textarea id="editor" name="articles_body"
+                          class="block-form__input @error('articles_body') block-form__input_error @enderror"
+                          placeholder="текст статьи"
+                >{{ $article->articles_body ?? '' }}</textarea>
 
-                    @error('articles_body')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+                @error('articles_body')
+                <p class="block-form__text-error">{{ $message }}</p>
+                @enderror
 
-                    <input type="file" name="name_image">
+                <button class="button admin__button" type="submit"
+                        value="save">
+                    Сохранить
+                </button>
+            </form>
 
-                    <button type="submit" class="text-center w-full bg-blue-900 rounded-md text-white py-3 font-medium"
-                            value="save">
-                        Сохранить
-                    </button>
-                </form>
-            </div>
+            <a class="button admin__button" href="{{route('article_admin')}}">
+                <span class="transition-button__text">Назад</span>
+            </a>
 
-            {{--                    <div class="transition">--}}
-            {{--                        <a href="{{$route}}" class="transition-button">--}}
-            {{--                            <span class="transition-button__text">{{$title_button}}</span>--}}
-            {{--                        </a>--}}
-            {{--                    </div>--}}
         </div>
 
     </main>
-    {{--    {{route('article', $article->id)}}--}}
 @endsection
 
 @push('scripts')

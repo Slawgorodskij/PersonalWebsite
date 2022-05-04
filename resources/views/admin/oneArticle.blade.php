@@ -13,28 +13,56 @@
 
         <div class="container">
 
-            <div>
-
-                <h2>{{ $article->title }}</h2>
-                <h3>{{ $article->description }}</h3>
-                <p>{{ $article->articles_body }}</p>
-
+            <p> Фотографии статьи: </p>
+            <div class="presentation container wrapper">
+                @isset($images)
+                    @foreach($images as $image)
+                        <div class="presentation__item">
+                            <img class="presentation__photo" src="/storage/images/{{$image->name_image}}" alt="photo">
+                            <div class="presentation__hover">
+                                    <h3>{{$image->description}}</h3>
+                            </div>
+                        </div>
+                    @endforeach
+                @endisset
             </div>
-            <form action="{{route('article.destroy', $article)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit">удаления статьи</button>
-            </form>
+
+            <h2>Заголовок статьи: {{ $article->title }}</h2>
+            <h3>Описание статьи: {{ $article->description }}</h3>
+            <p> Текст статьи: </p>
+            {!! $article->articles_body !!}
 
             <form action="{{route('article.edit', $article)}}" method="GET">
                 @csrf
-                <button type="submit">кнопка редактирования статьи</button>
+                <button class="button admin__button" type="submit">
+                    <span class="transition-button__text">Перейти к редактированию статьи</span>
+                </button>
             </form>
 
+            <form action="{{route('images.create')}}" method="GET">
+                @csrf
+                <button class="button admin__button" type="submit">
+                    <span class="transition-button__text">Перейти к добавлению фотографии</span>
+                </button>
+            </form>
 
-            <div>кнопка возвращения на страницу новостей</div>
+            <form action="{{route('article.destroy', $article)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="button admin__button" type="submit">
+                    <span class="transition-button__text">Удалить статью</span>
+                </button>
+            </form>
+
+            <a class="button admin__button" href="{{route('article.create')}}">
+                <span class="transition-button__text">Создать еще одну статью</span>
+            </a>
+
+            <a class="button admin__button" href="{{route('article_admin')}}">
+                <span class="transition-button__text">Назад на главную страницу</span>
+            </a>
         </div>
 
     </main>
-    {{--    {{route('article.show', $article->id)}}--}}
+
 @endsection

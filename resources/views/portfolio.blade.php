@@ -26,7 +26,7 @@
             <img class="main-block__photo nature__photo" src="/storage/images/work.jpg" alt="nature">
             <div class="work__text">
                 <h2 class="work__text_title">Интересна моя работа?</h2>
-                <a href="#">Нажимай для связи</a>
+                <a class="work__text_link" href="{{route('feedback.index')}}">Нажимай для связи</a>
             </div>
         </div>
     </main>

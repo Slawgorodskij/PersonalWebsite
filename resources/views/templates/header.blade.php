@@ -1,21 +1,16 @@
 <header class="header">
     <div class="container header__logo">
         <a href="{{route('home')}}">
-            <img src="/storage/images/logo.png" alt="logo">
+            <img class="header__images" src="/storage/images/logo.png" alt="logo">
         </a>
 
         <nav class="header__menu">
-            <a class="header__list" href="{{route('about')}}">Обо мне</a>
-            <a class="header__list" href="{{route('portfolio')}}">Работы</a>
-            @foreach($categories_for_menu as $category)
-                <a class="header__list" href="{{route('category', $category->id)}}">{{$category->title}}</a>
-            @endforeach
-            <a class="header__list" href="{{route('feedback.index')}}">Обратная связь</a>
-            @if (Auth::user() && Auth::user()->hasRole('admin'))
-                <a class="header__list" href="{{ route('home_admin') }}">Админ</a>
-            @endif
+            @include('templates.menu')
         </nav>
-        <div>
+        <div class="header__burger">
+            <span class="header__burger_line"></span>
+        </div>
+        <div class="none-block">
 
             @guest
                 @if (Route::has('login'))
@@ -52,4 +47,8 @@
 
         </div>
     </div>
+
+    <nav class="header__menu_mobile header__menu_inactive">
+        @include('templates.menu')
+    </nav>
 </header>
