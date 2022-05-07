@@ -18,11 +18,11 @@ mix.sass('resources/scss/app.scss', 'public/css').options({
     processCssUrls: false
 });
 
-mix.postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-]);
+// mix.postCss('resources/css/app.css', 'public/css', [
+//     require('postcss-import'),
+//     require('tailwindcss'),
+//     require('autoprefixer'),
+// ]);
 
 
 

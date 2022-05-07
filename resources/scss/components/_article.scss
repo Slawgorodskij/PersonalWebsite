@@ -33,39 +33,3 @@
     }
 }
 
-.slider-block {
-    display: flex;
-    overflow: hidden;
-
-    &__size_80 {
-        width: 70vw;
-        height: 70vh;
-    }
-
-    &__photo {
-        position: relative;
-        transition: all 1.2s ease-in-out;
-
-        &-size_80 {
-            min-width: 70vw;
-        }
-    }
-
-    &__photo-image {
-        @include photo-image;
-        z-index: 2;
-        transition: all 0.4s linear;
-    }
-
-    &__photo-hover {
-        @include block-hover;
-
-        &_link {
-            color: var(--color-white);
-        }
-    }
-
-    &__photo:hover .slider-block__photo-hover {
-        z-index: 5;
-    }
-}

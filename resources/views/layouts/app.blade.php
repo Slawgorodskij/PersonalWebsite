@@ -25,7 +25,7 @@
     <!-- Scripts -->
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+{{--    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>--}}
 
 
 </head>
@@ -38,24 +38,7 @@
     @include('templates.footer')
 </div>
 
-{{--<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>--}}
 @stack('scripts')
 </body>
-{{--    <body class="font-sans antialiased">--}}
-{{--        <div class="min-h-screen bg-gray-100">--}}
-{{--            @include('layouts.navigation')--}}
 
-{{--            <!-- Page Heading -->--}}
-{{--            <header class="bg-white shadow">--}}
-{{--                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">--}}
-{{--                    {{ $header }}--}}
-{{--                </div>--}}
-{{--            </header>--}}
-
-{{--            <!-- Page Content -->--}}
-{{--            <main>--}}
-{{--                {{ $slot }}--}}
-{{--            </main>--}}
-{{--        </div>--}}
-{{--    </body>--}}
 </html>

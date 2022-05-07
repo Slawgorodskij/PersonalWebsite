@@ -1,63 +1,120 @@
 <template>
 
-    <div>
-        <p>I am working</p>
-        <!--        <carousel>-->
-        <!--            <carousel-slide></carousel-slide>-->
-        <!--        </carousel>-->
+    <div class="carousel container wrapper">
+        <carousel
+            @next="next"
+            @prev="prev"
+        >
+            <carousel-slide
+                v-for="(image, data) in imagesArray"
+                :key="id"
+                :index="data"
+                :visibleSlade="visibleSlide"
+                :direction="direction">
+                <img class="carousel-block__image"
+                     :src="'/storage/images/' + image['name_image']"
+                     alt="photo">
+                <div v-show="image['description'] !== null" class="carousel-block__hover">
+                    <h2>{{ image['description'] }}</h2>
+                </div>
+            </carousel-slide>
+        </carousel>
     </div>
-    <!--    <div class="presentation-block" v-for="city in cityArray" :key="city.id">-->
-    <!--        <img class="presentation-block__photo" :src="city.images[0]['name']" alt="фотография города">-->
-    <!--        <div class="presentation-block__text">-->
-    <!--            {{ city.name }}-->
-    <!--        </div>-->
-    <!--        <div class="presentation-block__hover">-->
-    <!--            <a class="presentation-block__hover_link" :href="'cities/' + city.slug">-->
-    <!--                <h3>{{ city.description }}</h3>-->
-    <!--            </a>-->
-    <!--        </div>-->
-    <!--    </div>-->
 
 </template>
 
 <script>
 
-import _ from 'lodash';
+import Carousel from './Carousel';
+import CarouselSlide from './CarouselSlide';
 
 export default {
-    components: {},
-
+    components: {
+        Carousel,
+        CarouselSlide,
+    },
+    props: ['id'],
     data() {
         return {
             imagesArray: [],
             visibleSlide: 0,
+            direction: '',
         }
     },
 
-    methods: {
-        articleId() {
-            const article = document.querySelector('.introduction');
-            let articleId = article.dataset.name
-            console.log(articleId)
-            return articleId
+    computed: {
+        imagesArrayLen() {
+            return this.imagesArray.length
         },
 
-        fetch() {
+    },
 
-            axios.get('/api/apiImages', {
-                articleID: this.articleId(),
-            })
+    methods: {
+
+        fetch() {
+            axios.get('/api/apiImages/' + this.id, {})
                 .then(response => {
                     console.log(response);
                     this.imagesArray = response.data
                 })
+        },
 
-        }
+        next() {
+            if (this.visibleSlide >= this.imagesArrayLen - 1) {
+                this.visibleSlide = 0;
+            } else {
+                this.visibleSlide++;
+            }
+            this.direction = 'left';
+        },
+        prev() {
+            if (this.visibleSlide <= 0) {
+                this.visibleSlide = this.imagesArrayLen - 1;
+            } else {
+                this.visibleSlide--;
+            }
+            this.direction = 'right';
+        },
     },
     created() {
         this.fetch()
-
-
     }
 }
 </script>
+
+<style lang="scss">
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-block__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.carousel-block__hover {
+    position: absolute;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--color-white);
+    background: var(--color-background);
+    z-index: 0;
+    transition: all 0.4s linear;
+}
+
+
+</style>

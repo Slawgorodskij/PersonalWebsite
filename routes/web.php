@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminFeedbackController;
 use App\Http\Controllers\Admin\AdminImageController;
+use App\Http\Controllers\Api\ApiImagesController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifferentController;
@@ -47,5 +48,10 @@ Route::middleware('role:admin')
         Route::get('/categories', [AdminController::class, 'category'])->name('category_admin');
 
     });
+//Route::group(['as' => 'api.', 'prefix' => 'api'], function () {
+//    Route::get('/apiImages/id', [ApiImagesController::class, 'index']);
+//});
+
+Route::get('api/apiImages/{id}', [ApiImagesController::class, 'index']);
 
 require __DIR__ . '/auth.php';

@@ -1,12 +1,8 @@
 .header {
-    position: absolute;
+    position: fixed;
     width: 100%;
     background-color: var(--color-background);
-
-    //&__active {
-    //
-    //    z-index: 9;
-    //}
+    z-index: 9;
 
     &__images {
         @include mobile{

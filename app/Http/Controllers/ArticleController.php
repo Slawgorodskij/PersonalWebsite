@@ -10,7 +10,6 @@ class ArticleController extends Controller
     public function oneArticle($articleId)
     {
         $article = Article::find($articleId);
-//dd($article->image,);
         return view('oneArticle', [
             'article' => $article,
             'images' => $article->image,
